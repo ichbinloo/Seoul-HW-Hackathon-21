@@ -25,15 +25,23 @@ public class MainActivity extends AppCompatActivity {
         } catch (AmplifyException e) {
             Log.e("Tutorial", "Could not initialize Amplify", e);
         }
-        HeyDoc item = HeyDoc.builder()
-                .name("Build Android application")
-                .priority(Priority.HIGH)
-                .description("Build an Android application using Amplify")
-                .build();
-        Amplify.DataStore.save(
-                item,
-                success -> Log.i("Tutorial", "Saved item: " + success.item().getName()),
-                error -> Log.e("Tutorial", "Could not save item to DataStore", error)
+        Amplify.DataStore.query(
+                HeyDoc.class, heydocs -> {
+                    while (heydocs.hasNext()) {
+                        HeyDoc todo = heydocs.next();
+                        Log.i("Tutorial", "==== Todo ====");
+                        Log.i("Tutorial", "Name: " + todo.getName());
+
+                        if (todo.getPriority() != null) {
+                            Log.i("Tutorial", "Priority: " + todo.getPriority().toString());
+                        }
+
+                        if (todo.getDescription() != null) {
+                            Log.i("Tutorial", "Description: " + todo.getDescription());
+                        }
+                    }
+                },
+                failure -> Log.e("Tutorial", "Could not query DataStore", failure)
         );
     }
 }
