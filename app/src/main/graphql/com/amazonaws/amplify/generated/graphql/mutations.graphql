@@ -1,0 +1,49 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateHeyDoc(
+  $input: CreateHeyDocInput!
+  $condition: ModelHeyDocConditionInput
+) {
+  createHeyDoc(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    description
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateHeyDoc(
+  $input: UpdateHeyDocInput!
+  $condition: ModelHeyDocConditionInput
+) {
+  updateHeyDoc(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    description
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteHeyDoc(
+  $input: DeleteHeyDocInput!
+  $condition: ModelHeyDocConditionInput
+) {
+  deleteHeyDoc(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    description
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}

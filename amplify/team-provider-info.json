@@ -1,0 +1,15 @@
+{
+  "amplify": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-seoulhwhackathon21-amplify-100742-authRole",
+      "UnauthRoleArn": "arn:aws:iam::668039294979:role/amplify-seoulhwhackathon21-amplify-100742-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::668039294979:role/amplify-seoulhwhackathon21-amplify-100742-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-seoulhwhackathon21-amplify-100742-deployment",
+      "UnauthRoleName": "amplify-seoulhwhackathon21-amplify-100742-unauthRole",
+      "StackName": "amplify-seoulhwhackathon21-amplify-100742",
+      "StackId": "arn:aws:cloudformation:us-east-2:668039294979:stack/amplify-seoulhwhackathon21-amplify-100742/ed09cd20-4c96-11eb-aa92-027d42c0beec",
+      "AmplifyAppId": "d3l5g9zc15a5bg"
+    }
+  }
+}

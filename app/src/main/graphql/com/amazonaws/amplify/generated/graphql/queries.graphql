@@ -1,0 +1,62 @@
+# this is an auto generated file. This will be overwritten
+query SyncHeyDocs(
+  $filter: ModelHeyDocFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncHeyDocs(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      name
+      priority
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetHeyDoc($id: ID!) {
+  getHeyDoc(id: $id) {
+    id
+    name
+    priority
+    description
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+query ListHeyDocs(
+  $filter: ModelHeyDocFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listHeyDocs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      priority
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}

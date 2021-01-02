@@ -7,6 +7,5 @@ enum Priority {
 type HeyDoc @model {
   id: ID!
   name: String!
-  priority: Priority
   description: String
 }

@@ -5,12 +5,14 @@ buildscript {
         jcenter()
     }
     dependencies {
+        //implementation 'com.amazonaws:aws-android-sdk-iot:2.19.0'
         classpath "com.android.tools.build:gradle:4.1.1"
         //implementation 'com.amazonaws:aws-android-sdk-iot:2.2.+'
         //mplementation 'com.amazonaws:aws-android-sdk-core:2.2.+'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         classpath 'com.amplifyframework:amplify-tools-gradle-plugin:1.0.2'
+
     }
 }
 
@@ -21,7 +23,9 @@ allprojects {
     }
 }
 
-apply plugin: 'com.amplifyframework.amplifytools'
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+apply plugin: 'com.amplifyframework.amplifytools'
