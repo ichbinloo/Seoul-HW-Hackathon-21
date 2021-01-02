@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 public class InternetUtils {
+
     public static final String LOG_TAG = InternetUtils.class.getCanonicalName();
 
     public static boolean hasInternetConnection(Context context) {
@@ -23,7 +24,7 @@ public class InternetUtils {
         } else {
             Log.d(LOG_TAG, "Internet OK");
         }
-
         return isConnected;
     }
+
 }

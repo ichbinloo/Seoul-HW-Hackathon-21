@@ -1,11 +1,16 @@
-enum Priority {
-  LOW
-  NORMAL
-  HIGH
-}
-
 type HeyDoc @model {
-  id: ID!
-  name: String!
-  description: String
+  board_id: String!
+  temp: Int!
+  hum: Int!
+  press: Int!
+  accel_X: Int!
+  accel_Y: Int!
+  accel_Z: Int!
+  gryro_X: Int!
+  gryo_Y: Int!
+  gryo_Z: Int!
+  magn_X: Int!
+  magn_Y: Int!
+  magn_Z: Int!
+  proxi: Int
 }
