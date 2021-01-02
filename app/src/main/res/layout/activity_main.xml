@@ -1,142 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:columnCount="1"
+    android:rowCount="3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity"
+    android:alignmentMode="alignMargins"
+    android:columnOrderPreserved="false">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="135dp"
-        tools:layout_editor_absoluteY="100dp">
+        android:layout_gravity="center"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="100dp"
+        android:text="Hey Doc"
+        android:textColor="#000000"
+        android:textSize="32sp" />
 
+    <Button
+        android:id="@+id/emergencyRate"
+        android:layout_width="250dp"
+        android:layout_height="98dp"
+        android:layout_row="0"
+        android:layout_columnWeight="1"
+        android:layout_margin="12dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:text="Emergency Status"
+        android:textAllCaps="false"
+        android:textSize="32sp"
+        android:textColor="#FFFFFF"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:layout_marginBottom="120dp"
-            android:layout_gravity="center"
-            android:text="Hey Doc"
-            android:textColor="#000000"
-            android:textSize="32sp" />
+    <Button
+        android:id="@+id/heartRate"
+        android:layout_width="250dp"
+        android:layout_height="98dp"
+        android:layout_row="0"
+        android:layout_rowWeight="1"
+        android:layout_columnWeight="1"
+        android:layout_margin="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="Heart Rate"
+        android:textAllCaps="false"
+        android:textSize="32sp"
+        android:textColor="#FFFFFF"/>
 
-        <GridLayout
-            android:columnCount="1"
-            android:rowCount="3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alignmentMode="alignMargins"
-            android:columnOrderPreserved="false"
-            >
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="12dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp">
-
-                <RelativeLayout
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
-                    <ImageView
-                        android:src="@drawable/heart"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp" />
-                    <TextView
-                        android:layout_alignParentRight="true"
-                        android:gravity="center"
-                        android:textColor="#6f6f6f"
-                        android:textSize="18sp"
-                        android:layout_marginTop="12dp"
-                        android:text="Health Status"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" />
-                </RelativeLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="12dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp">
-
-                <RelativeLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
-                    <ImageView
-                        android:src="@drawable/heart"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp" />
-                    <TextView
-                        android:layout_alignParentRight="true"
-                        android:gravity="center"
-                        android:textColor="#6f6f6f"
-                        android:textSize="18sp"
-                        android:layout_marginTop="12dp"
-                        android:text="Heart Beat"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" />
-                </RelativeLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="12dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="6dp">
-
-                <RelativeLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
-                    <ImageView
-                        android:src="@drawable/heart"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp" />
-                    <TextView
-                        android:layout_alignParentRight="true"
-                        android:gravity="center"
-                        android:textColor="#6f6f6f"
-                        android:textSize="18sp"
-                        android:layout_marginTop="12dp"
-                        android:text="EMG"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content" />
-                </RelativeLayout>
-
-            </androidx.cardview.widget.CardView>
-
-
-
-        </GridLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</GridLayout>
