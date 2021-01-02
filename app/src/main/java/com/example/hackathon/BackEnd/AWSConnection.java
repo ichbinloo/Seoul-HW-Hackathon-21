@@ -1,25 +1,27 @@
-package com.example.hackathon.FrontEnd;
+package com.example.hackathon.BackEnd;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.iot.AWSIotKeystoreHelper;
+import com.amazonaws.mobileconnectors.iot.AWSIotMqttClientStatusCallback;
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttLastWillAndTestament;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
-import com.amazonaws.services.iot.AWSIot;
 import com.amazonaws.services.iot.AWSIotClient;
 import com.amazonaws.services.iot.model.AttachPrincipalPolicyRequest;
 import com.amazonaws.services.iot.model.CreateKeysAndCertificateRequest;
 import com.amazonaws.services.iot.model.CreateKeysAndCertificateResult;
 import com.example.hackathon.MainActivity;
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttManager;
-import com.amazonaws.mobileconnectors.iot.AWSIotMqttNewMessageCallback;
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttQos;
 
 import java.security.KeyStore;
 import java.util.UUID;
+import com.example.hackathon.R;
 
 public class AWSConnection {
 
@@ -43,9 +45,11 @@ public class AWSConnection {
 
     private Context context;
     private MainActivity mainActivity;
+    @SuppressLint("StaticFieldLeak")
     private static AWSConnection managerInstance;
     private KeyStore clientKeyStore = null;
     private String certificateId;
+    private boolean connected;
 
 
     private AWSConnection(Context context) {
@@ -113,9 +117,8 @@ public class AWSConnection {
                 @Override
                 public void run() {
                     try {
-                        // Create a new private key and certificate. This call
-                        // creates both on the server and returns them to the
-                        // device.
+                        // Create a new private key and certificate. This call creates both on the server
+                        // and returns them to the device.
                         CreateKeysAndCertificateRequest createKeysAndCertificateRequest =
                                 new CreateKeysAndCertificateRequest();
                         createKeysAndCertificateRequest.setSetAsActive(true);
@@ -128,23 +131,20 @@ public class AWSConnection {
                                         createKeysAndCertificateResult.getCertificateId() +
                                         " created.");
 
-                        // store in keystore for use in MQTT client
-                        // saved as alias "default" so a new certificate isn't
-                        // generated each run of this application
+                        // store in keystore for use in MQTT client and saved as alias "default"
+                        // so a new certificate isn't generated each run of this application
                         AWSIotKeystoreHelper.saveCertificateAndPrivateKey(certificateId,
                                 createKeysAndCertificateResult.getCertificatePem(),
                                 createKeysAndCertificateResult.getKeyPair().getPrivateKey(),
                                 keystorePath, keystoreName, keystorePassword);
 
-                        // load keystore from file into memory to pass on
-                        // connection
+                        // load keystore from file into memory to pass on connection
                         clientKeyStore = AWSIotKeystoreHelper.getIotKeystore(certificateId,
                                 keystorePath, keystoreName, keystorePassword);
 
                         // Attach a policy to the newly created certificate.
-                        // This flow assumes the policy was already created in
-                        // AWS IoT and we are now just attaching it to the
-                        // certificate.
+                        // Assuming that the policy was already created in AWS IoT and we are now
+                        // just attaching it to the certificate.
                         AttachPrincipalPolicyRequest policyAttachRequest =
                                 new AttachPrincipalPolicyRequest();
                         policyAttachRequest.setPolicyName(AWS_IOT_POLICY_NAME);
@@ -163,11 +163,39 @@ public class AWSConnection {
     }
 
     public void getConnection(){
-        try {
+        cognitoAuth();
+        connected = false;
 
+        try {
+            if (clientKeyStore != null) {
+                mqttManager.connect(clientKeyStore, new AWSIotMqttClientStatusCallback() {
+                    @Override
+                    public void onStatusChanged(final AWSIotMqttClientStatus status,
+                                                final Throwable throwable) {
+                        Log.d(LOG_TAG, "Status = " + String.valueOf(status));
+                        connected = (status == AWSIotMqttClientStatus.Connected);
+                    }
+                });
+            } else {
+                ToastMessage.setToastMessage(context, mainActivity.getResources().getString(R.string.try_connect),
+                        Toast.LENGTH_LONG);
+            }
         } catch (Exception error) {
             Log.e(LOG_TAG,"Connection fails.",error);
         }
+    }
+
+    public void disconnectAWS() {
+        try {
+            mqttManager.disconnect();
+            managerInstance = null;
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Disconnect error.", e);
+        }
+    }
+
+    public boolean isConnect(){
+        return connected;
     }
 
 }

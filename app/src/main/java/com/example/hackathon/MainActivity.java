@@ -10,8 +10,8 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.HeyDoc;
-import com.example.hackathon.FrontEnd.AWSConnection;
-import com.example.hackathon.FrontEnd.InternetUtils;
+import com.example.hackathon.BackEnd.AWSConnection;
+import com.example.hackathon.BackEnd.InternetUtils;
 
 public class MainActivity extends AppCompatActivity {
     private boolean internetConnection;

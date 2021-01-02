@@ -1,4 +1,4 @@
-package com.example.hackathon.FrontEnd;
+package com.example.hackathon.BackEnd;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
