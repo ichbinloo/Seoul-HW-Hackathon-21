@@ -9,12 +9,24 @@
     android:layout_gravity="center">
 
     <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="172dp"
+    android:layout_marginStart="61dp"
+    android:gravity="center"
+    android:text="@string/health_status"
+    android:textColor="#6f6f6f"
+    android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/health_stat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="122dp"
-        android:layout_marginStart="70dp"
-        android:gravity="center"
-        android:text="Your Health Status"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="322dp"
+        android:gravity="center_horizontal"
+        android:text="@string/checking"
         android:textColor="#6f6f6f"
-        android:textSize="32sp" />
+        android:textSize="32sp"
+        android:textStyle="bold"/>
 </RelativeLayout>

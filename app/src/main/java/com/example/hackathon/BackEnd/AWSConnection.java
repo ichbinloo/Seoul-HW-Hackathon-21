@@ -9,6 +9,7 @@ import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.mobileconnectors.iot.AWSIotKeystoreHelper;
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttClientStatusCallback;
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttLastWillAndTestament;
+import com.amazonaws.mobileconnectors.iot.AWSIotMqttNewMessageCallback;
 import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.iot.AWSIotClient;
@@ -19,6 +20,8 @@ import com.example.hackathon.MainActivity;
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttManager;
 import com.amazonaws.mobileconnectors.iot.AWSIotMqttQos;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.util.UUID;
 import com.example.hackathon.R;
@@ -28,13 +31,14 @@ public class AWSConnection {
     static final String LOG_TAG = AWSConnection.class.getCanonicalName();
     // Amazon Cognito Set-up
     private static final String COGNITO_POOL_ID = "ap-northeast-2:b1e57af4-a57e-4501-af00-6f7e04b638e9";
-    private static final String CUSTOMER_SPECIFIC_ENDPOINT = "";
+    private static final String CUSTOMER_SPECIFIC_ENDPOINT = "ancun86kxagz2-ats.iot.ap-northeast-2.amazonaws.com";
     private static final String AWS_IOT_POLICY_NAME = "";
     private CognitoCachingCredentialsProvider cachingCredentialsProvider;
     private AWSIotMqttManager mqttManager;
     private static final Regions MY_REGION = Regions.AP_NORTHEAST_2;
     private String clientID, keystorePath, keystoreName, keystorePassword;
     private AWSIotClient awsIotClient;
+    public String message;
 
     // Filename of KeyStore file on the filesystem
     private static final String KEYSTORE_NAME = "iot_keystore";
@@ -173,7 +177,10 @@ public class AWSConnection {
                     public void onStatusChanged(final AWSIotMqttClientStatus status,
                                                 final Throwable throwable) {
                         Log.d(LOG_TAG, "Status = " + String.valueOf(status));
-                        connected = (status == AWSIotMqttClientStatus.Connected);
+                        if (status == AWSIotMqttClientStatus.Connected) {
+                            connected = true;
+                            subscribeToTopic();
+                        }
                     }
                 });
             } else {
@@ -182,6 +189,25 @@ public class AWSConnection {
             }
         } catch (Exception error) {
             Log.e(LOG_TAG,"Connection fails.",error);
+        }
+    }
+
+    public void subscribeToTopic() {
+        try {
+            mqttManager.subscribeToTopic("test/dt/stm32l475e/sensor-data/topic",
+                    AWSIotMqttQos.QOS0 /* Quality of Service */, new AWSIotMqttNewMessageCallback() {
+                        @Override
+                        public void onMessageArrived(final String topic, final byte[] data) {
+                            message = new String(data, StandardCharsets.UTF_8);
+                            Log.d(LOG_TAG, "Message received: " + message);
+
+                            if (message.equals("falling")) {
+
+                            }
+                        }
+                    });
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Subscription error: ", e);
         }
     }
 

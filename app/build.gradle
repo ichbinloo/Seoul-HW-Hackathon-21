@@ -51,4 +51,5 @@ dependencies {
     implementation 'com.amazonaws:aws-android-sdk-iot:2.19.0'
     implementation ('com.amazonaws:aws-android-sdk-iot:2.19.0@aar') { transitive = true }
     implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.19.3@aar') { transitive = true }
+
 }

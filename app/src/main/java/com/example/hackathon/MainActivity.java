@@ -12,8 +12,8 @@ import com.example.hackathon.BackEnd.*;
 
 public class MainActivity extends AppCompatActivity {
     // Checking Internet connection
-    private InternetConnection internetConnection;
-    private AWSConnection awsConnection;
+    protected InternetConnection internetConnection;
+    protected AWSConnection awsConnection;
     private Button status; private Button heart_rate;
 
     // Android onCreate method to call actions when the Activity is launched.

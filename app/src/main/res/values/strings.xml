@@ -1,9 +1,18 @@
 <resources>
     <string name="app_name">Hey Doc</string>
+    <string name="checking">Checking…</string>
+
+    <!--Health-->
+    <string name="healthy_state">Healthy</string>
+    <string name="unhealthy_state">Need help</string>
+
+    <!--Heart Beat-->
+    <string name="beat">Heart beat</string>
 
     <!--Internet Connection-->
     <string name="try_connect">Connecting…</string>
     <string name="connection_error">Communication error. Try again later.</string>
     <string name="no_internet">No internet connection.</string>
     <string name="please_connect">Please, connect the device to valid network.</string>
+    <string name="health_status">Your Health Status</string>
 </resources>
